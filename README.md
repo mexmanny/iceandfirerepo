@@ -2,7 +2,13 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+After cloning locally you can navigate to the project directory and run the following:
+
+```bash
+npm install
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
@@ -14,11 +20,15 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+Currently this page you will be able to see a list of cards that contain the information of houses that are returned from https://anapioficeandfire.com/api/houses here you will be able to see (AT the moment a Generic Coat of arms) with the name of the house, once you click on that you can see the SwornMembers sworned to the selected house, in there you will be able to see if the a sworn member is currently alive or dead, if dead it will show you the information provided on their death, if you would like to learn more about the character you can click on the card and a Modal will show up if you want to learn more about him or her!
+
+## Deploy on Vercel
+
+## Learn More
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
 
 To learn more about Next.js, take a look at the following resources:
 
