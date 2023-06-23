@@ -20,7 +20,11 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Currently this page you will be able to see a list of cards that contain the information of houses that are returned from https://anapioficeandfire.com/api/houses here you will be able to see (AT the moment a Generic Coat of arms) with the name of the house, once you click on that you can see the SwornMembers sworned to the selected house, in there you will be able to see if the a sworn member is currently alive or dead, if dead it will show you the information provided on their death, if you would like to learn more about the character you can click on the card and a Modal will show up if you want to learn more about him or her!
+Currently this page you will be able to see a list of cards that contain the information of houses that are returned from https://anapioficeandfire.com/api/houses here you will be able to see (AT the moment a Generic Coat of arms) with the name of the house, once you click on that you can see the SwornMembers sworned to the selected house (Also generic knight picture), in there you will be able to see if the a sworn member is currently alive or dead, if dead it will show you the information provided on their death, if you would like to learn more about the character you can click on the card and a Modal will show up if you want to learn more about him or her
+
+## CHANGE LOG
+***
+* [06/22] Update columns to make sure all swornmembers are correctly shown, deleted unneccessary /house page and updated a button to navigate back home on Sworn Members Details page
 
 ## Deploy on Vercel
 
