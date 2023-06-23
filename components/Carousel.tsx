@@ -2,7 +2,7 @@ import { CarouselProps, House, HouseProps } from '@/types';
 import React, { useEffect, useState } from 'react';
 import HouseCard from './HouseCard';
 
-const SHOW_AT_ONCE = 4;
+const SHOW_AT_ONCE = 5;
 
 const Carousel = <T extends {}>({
   items,
@@ -12,17 +12,6 @@ const Carousel = <T extends {}>({
 }: CarouselProps<T>) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
-  let gridCols = 3;
-  if (items.length > 1) {
-    if (items.length % 2 === 0) {
-      gridCols = 2;
-    } else if (items.length % 3 === 0) {
-      gridCols = 3;
-    }
-  } else if (items.length === 1) {
-    gridCols = 1;
-  }
-
   const isLastIndex =
     currentIndex === Math.ceil(items.length / SHOW_AT_ONCE) - 1;
 
@@ -30,7 +19,7 @@ const Carousel = <T extends {}>({
     <div className="flex flex-col items-center justify-center h-screen py-16">
       <div className="flex-1 h-full">
         <div className="flex justify-center">
-          <div className={`grid grid-cols-${gridCols} gap-7`}>
+          <div className={`grid grid-cols-5 gap-7`}>
             {items
               .slice(
                 currentIndex * SHOW_AT_ONCE,
