@@ -25,6 +25,8 @@ Currently this page you will be able to see a list of cards that contain the inf
 ## CHANGE LOG
 ***
 * [06/22] Update columns to make sure all swornmembers are correctly shown, deleted unneccessary /house page and updated a button to navigate back home on Sworn Members Details page
+ 
+* [06/26] feature/updates branch created, made some modifications to how the list of items is being rendered, and added a navbar along with react query provider so that it is available for use through out the project. 
 
 ## Deploy on Vercel
 
