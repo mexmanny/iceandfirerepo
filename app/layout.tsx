@@ -1,6 +1,9 @@
 import Navbar from '@/components/NavBar';
 import './globals.css';
 import { Inter } from 'next/font/google';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ReactQueryProvider } from '@/utils/ReactQueryProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,11 +18,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        {/* <Navbar /> */}
-        {children}
-      </body>
-    </html>
+    <ReactQueryProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <Navbar />
+          <ToastContainer />
+          {children}
+        </body>
+      </html>
+    </ReactQueryProvider>
   );
 }

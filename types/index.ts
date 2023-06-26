@@ -1,20 +1,20 @@
 export interface House {
-  ancestralWeapons: string[];
-  cadetBranches: string[];
-  coatOfArms: string;
-  currentLord: string;
-  diedOut: string;
-  founded: Founded;
-  founder: string;
-  heir: string;
+  ancestralWeapons?: string[];
+  cadetBranches?: string[];
+  coatOfArms?: string;
+  currentLord?: string;
+  diedOut?: string;
+  founded?: Founded;
+  founder?: string;
+  heir?: string;
   name: string;
-  overlord: string;
-  region: string;
-  seats: string[];
+  overlord?: string;
+  region?: string;
+  seats?: string[];
   swornMembers: string[];
-  titles: string[];
+  titles?: string[];
   url: string;
-  words: string;
+  words?: string;
 }
 
 export enum Founded {
@@ -77,4 +77,5 @@ export interface CarouselProps<T> {
   renderItem: (item: T) => JSX.Element;
   handleNext: () => void;
   handlePrev: () => void;
+  isLastPage?: boolean;
 }

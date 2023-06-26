@@ -9,32 +9,26 @@ const Carousel = <T extends {}>({
   renderItem,
   handleNext,
   handlePrev,
+  isLastPage,
 }: CarouselProps<T>) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-
-  const isLastIndex =
-    currentIndex === Math.ceil(items.length / SHOW_AT_ONCE) - 1;
-
+  console.log(items.length);
+  console.log(currentIndex);
   return (
     <div className="flex flex-col items-center justify-center h-screen py-16">
       <div className="flex-1 h-full">
         <div className="flex justify-center">
           <div className={`grid grid-cols-5 gap-7`}>
-            {items
-              .slice(
-                currentIndex * SHOW_AT_ONCE,
-                currentIndex * SHOW_AT_ONCE + SHOW_AT_ONCE
-              )
-              .map((item, index) => (
-                <div key={index} className="w-48">
-                  {renderItem(item)}
-                </div>
-              ))}
+            {items.map((item, index) => (
+              <div key={index} className="w-48">
+                {renderItem(item)}
+              </div>
+            ))}
           </div>
         </div>
       </div>
-      <div className="mt-12 flex space-x-4 h-16">
-        <div className="flex flex-grow justify-end">
+      <div className="mt-12 flex justify-center">
+        <div className="flex space-x-4">
           <button
             onClick={handlePrev}
             className="rounded px-3 py-2 mt-23 border-b-4 border-l-2 shadow-lg bg-blue-700 border-blue-800 transition-all duration-200"
@@ -60,7 +54,7 @@ const Carousel = <T extends {}>({
             onClick={handleNext}
             className="rounded px-3 py-2 mt-23 border-b-4 border-l-2 shadow-lg bg-blue-700 border-blue-800 transition-all duration-200"
             style={{ margin: '0 65px' }}
-            disabled={isLastIndex}
+            disabled={isLastPage}
           >
             <svg
               className="w-6 h-6 text-gray-800 dark:text-white"

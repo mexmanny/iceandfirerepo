@@ -1,51 +1,47 @@
 'use client';
-import { House, SwornMemberProps, SwornMemberUICardProps } from '@/types';
-import React, { useEffect, useState } from 'react';
-
-import Skeleton from 'react-loading-skeleton';
+import React, { useState } from 'react';
+import { useQuery } from 'react-query';
 import { usePathname } from 'next/navigation';
 import Carousel from '@/components/Carousel';
 import SwornMemberCard from '@/components/SwornMemberCard';
 import Link from 'next/link';
-import Image from 'next/image';
-const ROWS_PER_PAGE = 10;
-const LoadingState = new Array(ROWS_PER_PAGE).fill(0);
+
+const ROWS_PER_PAGE = 5;
 
 const HousePage = () => {
-  const [houseData, setHouseData] = useState<House | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
   const [pageNum, setPageNum] = useState<number>(0);
-  const [selectedSwornMember, setSelectedSwornMember] = useState<string | null>(
-    null
-  );
-
-  const [displayModal, setDisplayModal] = useState(false);
-
   const pathName = usePathname();
 
-  useEffect(() => {
-    const fetchData = async () => {
+  const {
+    data: houseData,
+    isLoading,
+    isError,
+  } = useQuery(
+    ['houseData', pathName],
+    async () => {
       try {
-        setLoading(true);
         const response = await fetch(
           `/api/houses/${pathName.split('/').slice(-1)}`
         );
-
         const data = await response.json();
-        setHouseData(data);
-        setLoading(false);
+        return data;
       } catch (error) {
-        console.error('Error fetching house data:', error);
-        setLoading(false);
+        throw new Error('Error fetching house data');
       }
-    };
-
-    fetchData();
-  }, [pathName]);
+    },
+    { enabled: !!pathName }
+  );
 
   const renderSwornMemberCard = (url: string) => {
     return <SwornMemberCard url={url} />;
   };
+
+  const totalPages = Math.ceil(
+    (houseData?.swornMembers?.length !== undefined
+      ? houseData.swornMembers.length
+      : 0) / ROWS_PER_PAGE
+  );
+  const isLastPage = pageNum === totalPages - 1;
 
   return (
     <div className="w-screen h-screen flex flex-col items-center px-16">
@@ -77,17 +73,22 @@ const HousePage = () => {
           NO MEMBERS FOUND
         </p>
       )}
-      {houseData?.swornMembers && selectedSwornMember === null && (
+      {houseData?.swornMembers && (
         <Carousel
           items={houseData?.swornMembers.slice(
             pageNum * ROWS_PER_PAGE,
             pageNum * ROWS_PER_PAGE + ROWS_PER_PAGE
           )}
           renderItem={renderSwornMemberCard}
-          handleNext={() => setPageNum((currentVal) => currentVal + 1)}
+          handleNext={() => {
+            setPageNum((currentVal) =>
+              currentVal < totalPages - 1 ? currentVal + 1 : currentVal
+            );
+          }}
           handlePrev={() => {
             setPageNum((currentVal) => (currentVal > 0 ? currentVal - 1 : 0));
           }}
+          isLastPage={isLastPage}
         />
       )}
     </div>

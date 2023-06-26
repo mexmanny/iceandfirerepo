@@ -4,12 +4,16 @@ import React, { useEffect, useState } from 'react';
 import HouseCard from './HouseCard';
 import Carousel from './Carousel';
 import Skeleton from 'react-loading-skeleton';
+import { toast } from 'react-toastify';
+
 const ROWS_PER_PAGE = 10;
 const LoadingState = new Array(ROWS_PER_PAGE).fill(0);
+
 const HouseList = () => {
   const [houseData, setHouseData] = useState<House[]>([]);
   const [pageNum, setPageNum] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -23,12 +27,15 @@ const HouseList = () => {
         setLoading(false);
       } catch (error) {
         console.error('Error fetching house data:', error);
+        toast.error('house call failed');
         setLoading(false);
       }
     };
 
     fetchData();
   }, [pageNum]);
+
+  console.log(pageNum);
   const renderLoadingSkeleton = () => {
     return (
       <div className="p-4 pb-0 border rounded-xl border-gray-600 bg-gray-900">

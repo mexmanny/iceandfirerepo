@@ -3,6 +3,7 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import SwornMemberModal from './SwornMemberModal';
+import { toast } from 'react-toastify';
 
 const SwornMemberCard = ({ url }: SwornMemberDataProps) => {
   const [memberData, setMemberData] = useState<SwornMemberUICardProps | null>(
@@ -22,6 +23,7 @@ const SwornMemberCard = ({ url }: SwornMemberDataProps) => {
       const data = await response.json();
       return data;
     } catch (error) {
+      toast.error('swornMemberInfo call failed');
       console.error('Error fetching swornMember data:', error);
     }
   };
